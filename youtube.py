@@ -3,7 +3,7 @@ import tkinter as tk
 import customtkinter as ctk
 from PIL import Image, ImageTk
 from io import BytesIO
-from pytube import YouTube
+from pytubefix import YouTube
 
 def updateThumbnail(event):
     # Clear message label
@@ -27,7 +27,7 @@ def updateThumbnail(event):
 
         #process the image with pillow
         pil_image = Image.open(image_data)
-        pil_image.thumbnail((500,500))
+        pil_image.thumbnail((400,400))
 
         #convert image to tkinter format
         tk_image = ImageTk.PhotoImage(pil_image)
@@ -35,8 +35,9 @@ def updateThumbnail(event):
         #update the image on the existing label
         image_label.configure(image=tk_image)
         image_label.image = tk_image
-    except:
-        message.configure(text = "Inavlid link", text_color = "red")
+    except Exception as e:
+        print(e)
+        message.configure(text = "Invalid link", text_color = "red")
 
     
 
